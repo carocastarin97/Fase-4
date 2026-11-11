@@ -28,3 +28,23 @@ class ReservationError(SoftwareFJError):
 #Realizar operaciones no permitidas
 class InvalidStateError(ReservationError):
     pass
+    
+#Clase Padre
+class Home (ABC):
+    def __init__(self, home_id):
+        #Verifica que el identador sea valido
+        if not isinstance(home_id, str) or not home_id.strip():
+            raise ValueError("The home ID cannot be empty.")
+        #Guardamos la informacion
+        self.__id = home_id.strip()
+
+    #Permite acceder como un atributo normal
+    @property
+    def id(self):
+        return self.__id
+
+    #Las clases hijas ejecutan la accion   
+    @abstractmethod
+    def describe(self):
+        pass
+        
